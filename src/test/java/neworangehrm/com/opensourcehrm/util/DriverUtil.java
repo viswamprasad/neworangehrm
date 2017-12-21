@@ -8,16 +8,21 @@ import org.openqa.selenium.chrome.ChromeDriver;
  */
 
 public class DriverUtil {
-    public static WebDriver getDriverInstance(String browserType) {
-        switch (browserType.toLowerCase()) {
+
+    String browser = System.getProperty("browser", "chrome");
+
+    public WebDriver getDriverInstance() {
+
+        switch (browser.toLowerCase()) {
+
             case "chrome":
                 System.setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver.exe");
                 return new ChromeDriver();
 
             default:
-                System.out.println("Invalid Browser Type...");
+                System.out.println("Invalid browser type: " + browser);
+                System.exit(1);
                 return null;
         }
-
     }
 }
