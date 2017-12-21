@@ -6,8 +6,11 @@ import org.openqa.selenium.By;
  * Created by Viswa on 12/21/2017.
  */
 public class LoginPage {
+
     public static By getElementLocator(String elementName) {
+
         switch (elementName.toLowerCase()) {
+
             case "username":
                 return By.id("txtUsername");
             case "password":
