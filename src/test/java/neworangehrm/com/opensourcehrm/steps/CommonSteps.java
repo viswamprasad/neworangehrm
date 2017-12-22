@@ -9,6 +9,7 @@ import cucumber.api.java.After;
 import cucumber.api.java8.En;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -18,16 +19,20 @@ import neworangehrm.com.opensourcehrm.util.DriverUtil;
 import neworangehrm.com.opensourcehrm.util.DataUtil;
 
 import static neworangehrm.com.opensourcehrm.pages.LoginPage.*;
+import static neworangehrm.com.opensourcehrm.util.DataUtil.baseUrl;
 
 public class CommonSteps implements En {
 
     DriverUtil driverUtil = new DriverUtil();
     WebDriver driver = driverUtil.getDriverInstance();
 
+    @Before
+    public void setUp(){
+        DataUtil.loadProperties();
+    }
     public CommonSteps() {
-
         Given("^I am on the (.*) page$", (String webPage) -> {
-            driver.get(DataUtil.baseUrl);
+            driver.get(baseUrl);
         });
 
         When("^I fill the login form and submit$", () -> {
