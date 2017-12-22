@@ -9,6 +9,7 @@ import cucumber.api.java.After;
 import cucumber.api.java8.En;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -25,8 +26,11 @@ public class CommonSteps implements En {
     DriverUtil driverUtil = new DriverUtil();
     WebDriver driver = driverUtil.getDriverInstance();
 
-    public CommonSteps() {
+    @Before
+    public void setUp(){
         DataUtil.loadProperties();
+    }
+    public CommonSteps() {
         Given("^I am on the (.*) page$", (String webPage) -> {
             driver.get(baseUrl);
         });

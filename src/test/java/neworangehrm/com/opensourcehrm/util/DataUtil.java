@@ -1,7 +1,5 @@
 package neworangehrm.com.opensourcehrm.util;
 
-import static java.lang.System.getProperty;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -11,8 +9,6 @@ public class DataUtil {
     public static String browser;
     public static String baseUrl;
     public static String screenShotsPath;
-
-    public static String baseUrl = getProperty("baseUrl", "http://opensource.demo.orangehrmlive.com");
 
     public static void loadProperties() {
         try {
