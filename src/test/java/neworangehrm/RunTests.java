@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
  * Unit test for simple App.
  */
 @RunWith(Cucumber.class)
-@CucumberOptions(plugin = {"pretty","html:target/cucumber"},features = "src/test/resources/scenarios")
+@CucumberOptions(plugin = {"html:target/cucumber"},features = "src/test/resources/scenarios")
 
 public class RunTests
 

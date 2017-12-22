@@ -18,7 +18,7 @@ public class LoginPage {
             case "login":
                 return By.id("btnLogin");
             default:
-                return null;
+                throw new IllegalStateException("Invalid web element name: " + elementName);
         }
     }
 }
