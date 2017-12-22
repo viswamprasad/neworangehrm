@@ -10,7 +10,11 @@ import org.openqa.selenium.WebDriver;
 
 import neworangehrm.com.opensourcehrm.util.DriverUtil;
 import neworangehrm.com.opensourcehrm.util.DataUtil;
+
+import java.sql.Driver;
+
 import static neworangehrm.com.opensourcehrm.pages.LoginPage.*;
+import static neworangehrm.com.opensourcehrm.util.DataUtil.baseUrl;
 
 public class CommonSteps implements En {
 
@@ -18,9 +22,9 @@ public class CommonSteps implements En {
     WebDriver driver = driverUtil.getDriverInstance();
 
     public CommonSteps() {
-
+        DataUtil.loadProperties();
         Given("I am on the (.*) page", (String webPage) -> {
-            driver.get(DataUtil.baseUrl);
+            driver.get(baseUrl);
         });
 
         When("I enter valid (.*)", (String a) -> {
