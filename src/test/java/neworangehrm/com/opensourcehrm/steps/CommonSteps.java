@@ -6,10 +6,10 @@ package neworangehrm.com.opensourcehrm.steps;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java8.En;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;

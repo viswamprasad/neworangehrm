@@ -8,7 +8,6 @@ import java.util.Properties;
 public class DataUtil {
     public static String browser;
     public static String baseUrl;
-    public static String screenShotsPath;
 
     public static void loadProperties() {
         try {
@@ -17,7 +16,6 @@ public class DataUtil {
             prop.load(new FileInputStream(testEnvFile));
             browser = prop.getProperty("browser");
             baseUrl = prop.getProperty("baseurl");
-            screenShotsPath = prop.getProperty("screenshotpath");
         } catch (IOException e) {
             e.printStackTrace();
         }
