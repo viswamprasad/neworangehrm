@@ -11,19 +11,16 @@ import static java.lang.System.setProperty;
  */
 
 public class DriverUtil {
-
-    String browser = getProperty("browser", "chrome");
-
-    public WebDriver getDriverInstance() {
-
+    public static String browser = getProperty("browser", "chrome");
+    public static WebDriver driver;
+    static {
         switch (browser.toLowerCase()) {
-
             case "chrome":
                 setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver.exe");
-                return new ChromeDriver();
-
-            default:
-                throw new IllegalStateException("Invalid browser type: " + browser);
+                driver = new ChromeDriver();
         }
+    }
+    public WebDriver getDriverInstance() {
+            return driver;
     }
 }

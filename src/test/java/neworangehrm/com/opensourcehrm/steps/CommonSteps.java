@@ -4,6 +4,7 @@ package neworangehrm.com.opensourcehrm.steps;
  * Created by Viswa on 12/20/2017.
  */
 
+import cucumber.api.PendingException;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -32,7 +33,21 @@ public class CommonSteps implements En {
     }
     public CommonSteps() {
         Given("^I am on the (.*) page$", (String webPage) -> {
-            driver.get(baseUrl);
+            switch(webPage.toLowerCase()){
+                case "login":
+                    driver.get(baseUrl);
+                    break;
+                case "dashboard":
+                    driver.switchTo().defaultContent();
+//                    driver.get(baseUrl);
+//                    driver.findElement(getElementLocator("username")).sendKeys("admin");
+//                    driver.findElement(getElementLocator("password")).sendKeys("admin");
+//                    driver.findElement(getElementLocator("Login")).click();
+                    break;
+                default:
+                    driver.get(baseUrl);
+            }
+
         });
 
         When("^I fill the login form and submit$", () -> {
@@ -55,6 +70,6 @@ public class CommonSteps implements En {
         }catch (WebDriverException e) {
             e.printStackTrace();
         }
-        driver.close();
+        //driver.close();
     }
 }
