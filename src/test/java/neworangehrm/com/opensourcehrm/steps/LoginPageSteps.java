@@ -17,18 +17,17 @@ import static neworangehrm.com.opensourcehrm.pages.LoginPage.getElementLocator;
  */
 public class LoginPageSteps implements En {
     DriverUtil driverUtil = new DriverUtil();
-    WebDriver driver = driverUtil.getDriverInstance();
     Map<String, String> state = new HashMap<>();
 
     public LoginPageSteps() {
         When("^I view login form$", () -> {
-            if (!driver.findElement(getElementLocator("username")).isEnabled())
+            if (!driverUtil.getDriverInstance().findElement(getElementLocator("username")).isEnabled())
                 state.put("Username", "Not Displayed");
 
-            if (!driver.findElement(getElementLocator("password")).isEnabled())
+            if (!driverUtil.getDriverInstance().findElement(getElementLocator("password")).isEnabled())
                 state.put("Password", "Not Displayed");
 
-            if (!driver.findElement(getElementLocator("Login")).isEnabled())
+            if (!driverUtil.getDriverInstance().findElement(getElementLocator("Login")).isEnabled())
                 state.put("Login", "Not Enabled");
         });
         Then("^The required fields are displayed$", () -> {
