@@ -16,45 +16,59 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
 import neworangehrm.com.opensourcehrm.util.DriverUtil;
-import neworangehrm.com.opensourcehrm.util.DataUtil;
 
 import static neworangehrm.com.opensourcehrm.pages.LoginPage.*;
+import static neworangehrm.com.opensourcehrm.util.DataUtil.*;
 import static neworangehrm.com.opensourcehrm.util.DataUtil.baseUrl;
 
 public class CommonSteps implements En {
 
-    DriverUtil driverUtil = new DriverUtil();
-    WebDriver driver = driverUtil.getDriverInstance();
+    DriverUtil driverUtil;
 
     @Before
-    public void setUp(){
-        DataUtil.loadProperties();
+    public void setUp() {
+
+        driverUtil = new DriverUtil();
     }
     public CommonSteps() {
         Given("^I am on the (.*) page$", (String webPage) -> {
-            driver.get(baseUrl);
+            switch(webPage.toLowerCase()){
+                case "login":
+                    driverUtil.getDriverInstance().get(baseUrl);
+                    break;
+                case "dashboard":
+                    driverUtil.getDriverInstance().get(baseUrl);
+                    driverUtil.getDriverInstance().findElement(getElementLocator("username")).sendKeys("admin");
+                    driverUtil.getDriverInstance().findElement(getElementLocator("password")).sendKeys("admin");
+                    driverUtil.getDriverInstance().findElement(getElementLocator("Login")).click();
+                    break;
+                default:
+                    driverUtil.getDriverInstance().get(baseUrl);
+            }
+
         });
 
         When("^I fill the login form and submit$", () -> {
-            driver.findElement(getElementLocator("username")).sendKeys("admin");
-            driver.findElement(getElementLocator("password")).sendKeys("admin");
-            driver.findElement(getElementLocator("Login")).click();
+            driverUtil.getDriverInstance().findElement(getElementLocator("username")).sendKeys("admin");
+            driverUtil.getDriverInstance().findElement(getElementLocator("password")).sendKeys("admin");
+            driverUtil.getDriverInstance().findElement(getElementLocator("Login")).click();
         });
 
         Then("^The page is displayed$", () -> {
-            Assert.assertEquals("Mismatch in page title", "OrangeHRM", driver.getTitle());
+            Assert.assertEquals("Mismatch in page title", "OrangeHRM", driverUtil.getDriverInstance().getTitle());
         });
     }
 
     @After
     public void cleanup(Scenario scenario) {
         try {
-            TakesScreenshot takesScreenshot = ((TakesScreenshot)driver);
+            TakesScreenshot takesScreenshot = ((TakesScreenshot)driverUtil.getDriverInstance());
             byte[] screenshot = takesScreenshot.getScreenshotAs(OutputType.BYTES);
             scenario.embed(screenshot, "image/png");
         }catch (WebDriverException e) {
             e.printStackTrace();
         }
-        driver.close();
+        driverUtil.getDriverInstance().quit();
+        driverUtil.clear();
     }
 }

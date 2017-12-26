@@ -3,7 +3,8 @@ package neworangehrm.com.opensourcehrm.util;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import static java.lang.System.getProperty;
+import java.util.Optional;
+
 import static java.lang.System.setProperty;
 
 /**
@@ -12,18 +13,23 @@ import static java.lang.System.setProperty;
 
 public class DriverUtil {
 
-    String browser = getProperty("browser", "chrome");
+    static WebDriver driver;
+    static DataUtil dataUtil = new DataUtil();
 
-    public WebDriver getDriverInstance() {
+    public synchronized WebDriver getDriverInstance() {
+        if(Optional.ofNullable(driver).isPresent())
+            return driver;
 
-        switch (browser.toLowerCase()) {
-
+        switch (dataUtil.browser.toLowerCase()) {
             case "chrome":
                 setProperty("webdriver.chrome.driver", "src/test/resources/webdrivers/chromedriver.exe");
-                return new ChromeDriver();
-
-            default:
-                throw new IllegalStateException("Invalid browser type: " + browser);
+                driver = new ChromeDriver();
         }
+
+        return driver;
+    }
+
+    public void clear() {
+        driver = null;
     }
 }

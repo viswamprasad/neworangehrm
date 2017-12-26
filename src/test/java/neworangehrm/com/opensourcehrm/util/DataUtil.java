@@ -6,10 +6,11 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class DataUtil {
+
     public static String browser;
     public static String baseUrl;
 
-    public static void loadProperties() {
+    public DataUtil() {
         try {
             Properties prop = new Properties();
             File testEnvFile = new File("src/test/resources/testenv.properties");
