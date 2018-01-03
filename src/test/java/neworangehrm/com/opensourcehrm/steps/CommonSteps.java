@@ -4,11 +4,16 @@ package neworangehrm.com.opensourcehrm.steps;
  * Created by Viswa on 12/20/2017.
  */
 
+import cucumber.api.PendingException;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java8.En;
 
+import neworangehrm.com.opensourcehrm.pages.CommonWebPage;
+import neworangehrm.com.opensourcehrm.pages.LoginPage;
+import neworangehrm.com.opensourcehrm.pages.UserManagementPage;
+import neworangehrm.com.opensourcehrm.util.ReadTestCases;
 import org.junit.Assert;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -16,14 +21,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
 import neworangehrm.com.opensourcehrm.util.DriverUtil;
+import neworangehrm.com.opensourcehrm.util.PageUtil;
 
-import static neworangehrm.com.opensourcehrm.pages.LoginPage.*;
-import static neworangehrm.com.opensourcehrm.util.DataUtil.*;
 import static neworangehrm.com.opensourcehrm.util.DataUtil.baseUrl;
 
 public class CommonSteps implements En {
 
-    DriverUtil driverUtil;
+    DriverUtil driverUtil = new DriverUtil();
+    WebDriver driver = driverUtil.getDriverInstance();
+    PageUtil pageUtil = new PageUtil();
+    ReadTestCases readTestCases;
 
     @Before
     public void setUp() {
@@ -31,16 +38,22 @@ public class CommonSteps implements En {
         driverUtil = new DriverUtil();
     }
     public CommonSteps() {
-        Given("^I am on the (.*) page$", (String webPage) -> {
+        Given("^I am on the \"([^\"]*)\" page$", (String webPage) -> {
             switch(webPage.toLowerCase()){
                 case "login":
                     driverUtil.getDriverInstance().get(baseUrl);
+                    pageUtil.setCurrentPage("login");
                     break;
                 case "dashboard":
-                    driverUtil.getDriverInstance().get(baseUrl);
-                    driverUtil.getDriverInstance().findElement(getElementLocator("username")).sendKeys("admin");
-                    driverUtil.getDriverInstance().findElement(getElementLocator("password")).sendKeys("admin");
-                    driverUtil.getDriverInstance().findElement(getElementLocator("Login")).click();
+                    //driverUtil.getDriverInstance().get(baseUrl);
+                    pageUtil.setCurrentPage("dashboard");
+                    //pageActions.login(driver, "Verify valid admin login");
+//                    driverUtil.getDriverInstance().findElement(getElementLocator("username")).sendKeys("admin");
+//                    driverUtil.getDriverInstance().findElement(getElementLocator("password")).sendKeys("admin");
+//                    driverUtil.getDriverInstance().findElement(getElementLocator("Login")).click();
+                    break;
+                case "usermanagement":
+                    pageUtil.setCurrentPage("usermanagement");
                     break;
                 default:
                     driverUtil.getDriverInstance().get(baseUrl);
@@ -48,14 +61,25 @@ public class CommonSteps implements En {
 
         });
 
-        When("^I fill the login form and submit$", () -> {
-            driverUtil.getDriverInstance().findElement(getElementLocator("username")).sendKeys("admin");
-            driverUtil.getDriverInstance().findElement(getElementLocator("password")).sendKeys("admin");
-            driverUtil.getDriverInstance().findElement(getElementLocator("Login")).click();
+        When("^I fill the login form and submit for \"([^\"]*)\"$", (String testCaseName) -> {
+            ((LoginPage) pageUtil.getCurrentPage()).login(driver, testCaseName);
+            //pageActions.login(driver, "Verify valid admin login");
+//            driverUtil.getDriverInstance().findElement(getElementLocator("username")).sendKeys("admin");
+//            driverUtil.getDriverInstance().findElement(getElementLocator("password")).sendKeys("admin");
+              //driverUtil.getDriverInstance().findElement(getElementLocator("Login")).click();
         });
 
         Then("^The page is displayed$", () -> {
             Assert.assertEquals("Mismatch in page title", "OrangeHRM", driverUtil.getDriverInstance().getTitle());
+            //TODO: Expected title should be changed to unique value and it can not be OrangeHRM which is a default value
+        });
+        Given("^Load TestCases for \"([^\"]*)\"$", (String testCasesFileName) -> {
+            readTestCases = new ReadTestCases(testCasesFileName);
+        });
+        Given("^I am already logged in$", () -> {
+            driverUtil.getDriverInstance().get(baseUrl);
+            pageUtil.setCurrentPage("login");
+            ((LoginPage) pageUtil.getCurrentPage()).login(driver);
         });
     }
 

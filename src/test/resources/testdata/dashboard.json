@@ -1,0 +1,8 @@
+[
+  {
+    "name": "Verify user login welcome message",
+    "testOutput": {
+      "expectedResult": "Admin login should be successful"
+    }
+  }
+]

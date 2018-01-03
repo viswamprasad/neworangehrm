@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Verify user add button",
+    "testInput": {
+      "menuNavigation": {
+        "menu": "adminmenu",
+        "subMenu": "usermanagementsubmenu",
+        "menuItem": "users"
+      }
+    },
+    "testOutput": {
+      "expectedElement": "addbutton"
+    }
+  }
+]
