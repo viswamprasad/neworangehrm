@@ -1,16 +1,12 @@
 package neworangehrm.com.opensourcehrm.steps;
 
-import cucumber.api.PendingException;
 import cucumber.api.java8.En;
-import neworangehrm.com.opensourcehrm.pages.LoginPage;
 import neworangehrm.com.opensourcehrm.util.DriverUtil;
+import neworangehrm.com.opensourcehrm.util.PageUtil;
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static neworangehrm.com.opensourcehrm.pages.LoginPage.getElementLocator;
 
 /**
  * Created by Viswa on 12/25/2017.
@@ -21,15 +17,18 @@ public class LoginPageSteps implements En {
 
     public LoginPageSteps() {
         When("^I view login form$", () -> {
-            if (!driverUtil.getDriverInstance().findElement(getElementLocator("username")).isEnabled())
+            int i = 0;
+
+            if (!driverUtil.getDriverInstance().findElement(PageUtil.commonWebPage.getElementLocator("username")).isEnabled())
                 state.put("Username", "Not Displayed");
 
-            if (!driverUtil.getDriverInstance().findElement(getElementLocator("password")).isEnabled())
+            if (!driverUtil.getDriverInstance().findElement(PageUtil.commonWebPage.getElementLocator("password")).isEnabled())
                 state.put("Password", "Not Displayed");
 
-            if (!driverUtil.getDriverInstance().findElement(getElementLocator("Login")).isEnabled())
+            if (!driverUtil.getDriverInstance().findElement(PageUtil.commonWebPage.getElementLocator("Login")).isEnabled())
                 state.put("Login", "Not Enabled");
         });
+
         Then("^The required fields are displayed$", () -> {
             Assert.assertTrue(state.values().toString(), state.isEmpty());
         });

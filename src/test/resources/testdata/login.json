@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Verify valid admin login",
+    "testInput": {
+      "formElements": [
+        {
+          "elementName": "username",
+          "elementType": "Textbox",
+          "elementValue": "admin"
+        },
+        {
+          "elementName": "password",
+          "elementType": "Textbox",
+          "elementValue": "admin"
+        },
+        {
+          "elementName": "login",
+          "elementType": "button"
+        }
+      ]
+    },
+    "testOutput": {
+      "expectedResult": "Admin login should be successful"
+    }
+  }
+]
