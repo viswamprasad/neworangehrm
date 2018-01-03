@@ -45,12 +45,7 @@ public class CommonSteps implements En {
                     pageUtil.setCurrentPage("login");
                     break;
                 case "dashboard":
-                    //driverUtil.getDriverInstance().get(baseUrl);
                     pageUtil.setCurrentPage("dashboard");
-                    //pageActions.login(driver, "Verify valid admin login");
-//                    driverUtil.getDriverInstance().findElement(getElementLocator("username")).sendKeys("admin");
-//                    driverUtil.getDriverInstance().findElement(getElementLocator("password")).sendKeys("admin");
-//                    driverUtil.getDriverInstance().findElement(getElementLocator("Login")).click();
                     break;
                 case "usermanagement":
                     pageUtil.setCurrentPage("usermanagement");
@@ -63,10 +58,6 @@ public class CommonSteps implements En {
 
         When("^I fill the login form and submit for \"([^\"]*)\"$", (String testCaseName) -> {
             ((LoginPage) pageUtil.getCurrentPage()).login(driver, testCaseName);
-            //pageActions.login(driver, "Verify valid admin login");
-//            driverUtil.getDriverInstance().findElement(getElementLocator("username")).sendKeys("admin");
-//            driverUtil.getDriverInstance().findElement(getElementLocator("password")).sendKeys("admin");
-              //driverUtil.getDriverInstance().findElement(getElementLocator("Login")).click();
         });
 
         Then("^The page is displayed$", () -> {

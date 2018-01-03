@@ -14,7 +14,6 @@ public class UserManagementPage extends CommonWebPage {
                 return By.id("UserHeading");
             default:
                 return super.getElementLocatorForCommon(elementName);
-                //throw new IllegalStateException("Invalid web element name: " + elementName);
         }
     }
 }

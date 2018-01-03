@@ -12,7 +12,6 @@ public class DashboardPage extends CommonWebPage {
                 return By.id("welcome");
             default:
                 return super.getElementLocatorForCommon(elementName);
-                //throw new IllegalStateException("Invalid web element name: " + elementName);
         }
     }
 }

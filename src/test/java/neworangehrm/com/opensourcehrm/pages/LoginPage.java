@@ -21,7 +21,6 @@ public class LoginPage extends CommonWebPage {
                 return By.id("btnLogin");
             default:
                 return super.getElementLocatorForCommon(elementName);
-                //throw new IllegalStateException("Invalid web element name: " + elementName);
         }
     }
 

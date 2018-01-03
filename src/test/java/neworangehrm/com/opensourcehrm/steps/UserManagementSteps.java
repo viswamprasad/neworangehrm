@@ -22,13 +22,8 @@ public class UserManagementSteps implements En {
     public UserManagementSteps() {
         When("^I select Admin -> User Management -> Users -> Add for \"([^\"]*)\"$", (String testCaseName) -> {
             commonWebPage.menuNavigation(driver, testCaseName);
-//            menuList.add("admin");
-//            menuList.add("usermanagement");
-//            menuList.add("users");
-//            pageActions.menuClick(driver, menuList);
-//            pageActions.buttonClick(driver, "add");
         });
-        Then("^(.*) is displayed for \"([^\"]*)\"$", (String someElement, String testCaseName) -> {
+        Then("^\"([^\"]*)\" web element is displayed for \"([^\"]*)\"$", (String someElement, String testCaseName) -> {
             Assert.assertTrue("Failed to find " + someElement, commonWebPage.isElementDisplayed(driver, testCaseName, someElement));
 
         });

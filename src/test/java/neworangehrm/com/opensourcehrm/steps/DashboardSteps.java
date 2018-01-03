@@ -19,10 +19,9 @@ public class DashboardSteps implements En {
     public DashboardSteps() {
         When("^I view welcome message$", () -> {
             state.put("name", driverUtil.getDriverInstance().findElement(PageUtil.commonWebPage.getElementLocator("welcomemessage")).getText());
-            //state.put("name", driverUtil.getDriverInstance().findElement(By.id("welcome")).getText());
         });
-        Then("^Username is displayed$", () -> {
-            Assert.assertTrue("Welcome message is missing user name", state.get("name").contains("Admin"));
+        Then("^\"([^\"]*)\" text is displayed$", (String someText) -> {
+            Assert.assertTrue("Welcome message is missing user name", state.get("name").contains(someText));
         });
 
     }

@@ -11,5 +11,5 @@ Feature: Dashboard Page Tests
   Scenario: Validate dashboard page
     Given I am on the "dashboard" page
     When I view welcome message
-    Then Username is displayed
+    Then "Admin" text is displayed
 

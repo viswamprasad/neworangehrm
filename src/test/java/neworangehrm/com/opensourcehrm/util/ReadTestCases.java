@@ -29,21 +29,4 @@ public class ReadTestCases {
         }
         throw new IllegalAccessException("TestCase not found: " + testCaseName);
     }
-
-//    public static void main(String... args) {
-//        ReadTestCases rtc = new ReadTestCases();
-//        List<TestCase> tc = rtc.getTestCases("login");
-//        for (int i = 0; i < tc.size(); i++) {
-//            System.out.println(tc.get(i).getName());
-//            System.out.println(tc.get(i).getTestInput().getFormElements().get(i).getElementName());
-//            System.out.println(tc.get(i).getTestOutput().getExpectedResult());
-//        }
-//        try {
-//            TestCase testCase = rtc.getTestCase("Verify valid admin login");
-//            System.out.println(testCase.getName());
-//        } catch (IllegalAccessException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
 }
